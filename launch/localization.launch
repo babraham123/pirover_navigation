@@ -1,0 +1,12 @@
+<launch>
+  <master auto="start"/>
+  <include file="$(find pirover)/launch/differential_drive.launch" />
+
+  <!-- Run the map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find pirover)/maps/living_room_map.pgm 0.050"/>
+
+  <!--- Run AMCL ? -->
+  <include file="$(find amcl)/examples/amcl_diff.launch" />
+
+  <include file="$(find pirover)/launch/move_base.launch" />  
+</launch>

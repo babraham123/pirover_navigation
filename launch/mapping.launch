@@ -1,0 +1,8 @@
+<launch>
+    <master auto="start"/>
+    <include file="$(find pirover)/launch/differential_drive.launch" />
+
+    <include file="$(find pirover)/launch/gmapping.launch" />
+
+    <node pkg="differential_drive" type="virtual_joystick.py" name="virtual_joystick" output="screen"/>
+</launch>

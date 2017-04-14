@@ -1,0 +1,21 @@
+<launch>
+  <!-- change this next line to include the launch file for your robot's hardware drivers: -->
+  <include file="$(find pirover)/launch/sensors.launch" />
+
+  <param name="robot_description" textfile="$(find pirover)/description/robot.urdf" />
+  <!-- <node pkg="rviz" type="rviz" name="rviz" output="screen"/> -->
+  
+  <node pkg="tf" type="static_transform_publisher" name="base_to_laser" args="0 0 0 0 0 0 /base_link /laser 100"/> 
+  <!-- <node pkg="rviz" type="rviz" name="rviz" args="-d $(find pirover)/viz/neato_laser.rviz"/> -->
+
+  <node pkg="differential_drive" type="diff_tf.py" name="diff_tf">
+     <rosparam param="rate">8.0</rosparam>
+     <rosparam param="base_width">0.14</rosparam>
+  </node>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" /> 
+
+  <node pkg="differential_drive" type="twist_to_motors.py" name="twist_to_motors" output="screen">
+    <rosparam param="base_width">0.14</rosparam>
+  </node>
+
+</launch>

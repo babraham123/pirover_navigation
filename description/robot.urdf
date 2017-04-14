@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<robot name="origins">
+
+  <!--
+    Size: 20 x 14cm (L x W)
+    Wheel size: 6.5 x 2.7cm (Dia. x H)
+    Motor power supply is 3V ~ 6V. 
+  -->
+
+  <material name="black">
+    <color rgba="0 0 0 1"/>
+  </material>
+  <material name="white">
+    <color rgba="1 1 1 1"/>
+  </material>
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+          <box size="0.2 .14 0.05"/> <!-- l w h ? -->
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.06"/> <!-- TODO -->
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.2 .14 0.05"/> <!-- l w h ? -->
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="2"/>
+      <inertia ixx="0.0038" ixy="0.0" ixz="0.0" iyy="0.0071" iyz="0.0" izz="0.01"/>
+    </inertial> <!-- Ixx = m/12 (y^2 + z^2) -->
+  </link>
+
+  <link name="rwheel">
+    <visual>
+      <geometry>
+        <cylinder length="0.027" radius="0.0325"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.027" radius="0.0325"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.2"/>
+      <inertia ixx="0.000013" ixy="0.0" ixz="0.0" iyy="0.000013" iyz="0.0" izz="0.00022"/>
+    </inertial> <!-- Ixx = (mh^2)/12, Izz = mr^2 -->
+  </link>
+
+  <joint name="base_to_rwheel" type="fixed">
+    <parent link="base_link"/>
+    <child link="rwheel"/>
+    <origin xyz="0.0675 -0.08 0.0325" rpy="-1.5708 0 0"/>
+  </joint>
+
+  <link name="lwheel">
+    <visual>
+      <geometry>
+        <cylinder length="0.027" radius="0.0325"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.027" radius="0.0325"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.2"/>
+      <inertia ixx="0.000013" ixy="0.0" ixz="0.0" iyy="0.000013" iyz="0.0" izz="0.00022"/>
+    </inertial> <!-- Ixx = (mh^2)/12, Izz = mr^2 -->
+  </link>
+
+  <joint name="base_to_lwheel" type="fixed">
+    <parent link="base_link"/>
+    <child link="lwheel"/>
+    <origin xyz="0.0675 0.08 0.0325" rpy="1.5708 0 0"/>
+  </joint>
+
+  <!-- caster wheel -->
+  <link name="cwheel">
+    <visual>
+      <geometry>
+        <cylinder length="0.015" radius="0.02"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.015" radius="0.02"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1"/>
+      <inertia ixx="0.000013" ixy="0.0" ixz="0.0" iyy="0.000013" iyz="0.0" izz="0.00022"/>
+    </inertial> <!-- Ixx = (mh^2)/12, Izz = mr^2 -->
+  </link>
+
+  <joint name="base_to_cwheel" type="fixed">
+    <parent link="base_link"/>
+    <child link="cwheel"/>
+    <origin xyz="-0.0675 0 0.02" rpy="1.5708 0 0"/>
+  </joint>
+
+  <link name="laser">
+    <visual>
+      <geometry>
+        <box size="0.04 0.04 0.04"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.04 0.04 0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1"/>
+      <inertia ixx="0.000007" ixy="0.0" ixz="0.0" iyy="0.000007" iyz="0.0" izz="0.000007"/>
+    </inertial> <!-- Ixx = m/12 (y^2 + z^2) -->
+  </link>
+
+  <joint name="base_to_laser" type="fixed">
+    <parent link="base_link"/>
+    <child link="laser"/>
+    <origin xyz="0.07 0 0.1" rpy="0 0 0"/>
+  </joint>
+
+</robot>
