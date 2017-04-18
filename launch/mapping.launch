@@ -4,5 +4,12 @@
 
     <include file="$(find pirover)/launch/gmapping.launch" />
 
-    <node pkg="differential_drive" type="virtual_joystick.py" name="virtual_joystick" output="screen"/>
+    <machine name="cmd_control" address="192.168.1.***" env-loader="/opt/ros/kinetic/env.sh" user="babraham"/>
+    <node machine="cmd_control" pkg="differential_drive" type="virtual_joystick.py" name="virtual_joystick" output="screen"/>
 </launch>
+
+<!-- environment loader
+#!/bin/sh
+. /opt/ros/fuerte/setup.sh
+exec "$@"
+-->

@@ -3,10 +3,15 @@
   <include file="$(find pirover)/launch/differential_drive.launch" />
 
   <!-- Run the map server -->
-  <node name="map_server" pkg="map_server" type="map_server" args="$(find pirover)/maps/living_room_map.pgm 0.050"/>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find pirover)/maps/living_room.yaml"/>
 
-  <!--- Run AMCL ? -->
-  <include file="$(find amcl)/examples/amcl_diff.launch" />
+  <!--- Run AMCL -->
+  <include file="$(find pirover)/launch/amcl.launch">
+    <arg name="initial_pose_x" value="0"/>
+    <arg name="initial_pose_y" value="0"/>
+    <arg name="initial_pose_a" value="0"/>
+  </include>
+  <!-- <include file="$(find amcl)/examples/amcl_diff.launch" /> -->
 
   <include file="$(find pirover)/launch/move_base.launch" />  
 </launch>
