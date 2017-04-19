@@ -6,7 +6,8 @@ include_directories(${ROS_LIB_DIR})
 add_definitions(-DUSB_CON)
 
 generate_arduino_firmware(rover
-  SRCS chatter.cpp ${ROS_LIB_DIR}/time.cpp
+  SKETCH speed_control
+  LIBS PID_v1
   BOARD uno
   PORT /dev/ttyACM0
 )

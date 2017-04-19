@@ -37,8 +37,8 @@ std_msgs::Int16 encoder_msg;
 ros::Publisher pub_r("rwheel", &encoder_msg);
 ros::Publisher pub_l("lwheel", &encoder_msg);
 
-ros::Subscriber<std_msgs::Int16> sub_r("rwheel_vtarget", &cmd_vel_r_cb);
-ros::Subscriber<std_msgs::Int16> sub_l("lwheel_vtarget", &cmd_vel_l_cb);
+ros::Subscriber<std_msgs::Float32> sub_r("rwheel_vtarget", &cmd_vel_r_cb);
+ros::Subscriber<std_msgs::Float32> sub_l("lwheel_vtarget", &cmd_vel_l_cb);
 
 void count_r() 
 {
@@ -49,8 +49,6 @@ void count_l()
 {
   lCounter++;
 }
-
-// TODO: switch to Int16 / int
 
 void setup()
 {
